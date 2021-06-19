@@ -53,7 +53,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
-        private bool  m_IsGrounded;
+        public bool  m_IsGrounded;
 
         //powerJump
         public LayerMask whatIsJPlatform;
@@ -72,18 +72,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Awake()
         {
-            if(!enemyFollow.gameover){
+            // if(!enemyFollow.gameover){
                 canrotate = true;
                 m_RigidBody = GetComponent<Rigidbody>();
                 m_Capsule = GetComponent<CapsuleCollider>();
                 mouseLook.Init (transform, cam.transform);
-            }
+            // }
         }
 
         private void Update()
         {
             relativevelocity = transform.InverseTransformDirection(m_RigidBody.velocity);
-            if (m_IsGrounded && !enemyFollow.gameover)
+            if (m_IsGrounded ) // && !enemyFollow.gameover
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -97,15 +97,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     }
                 }
             }
-            if(enemyFollow.gameover){
-                m_RigidBody.mass = 100;
-                m_RigidBody.drag = 100;
-            }
+            // if(enemyFollow.gameover){
+            //     m_RigidBody.mass = 100;
+            //     m_RigidBody.drag = 100;
+            // }
         }
 
         private void LateUpdate()
         {
-            if(!enemyFollow.gameover){
+            //if(!enemyFollow.gameover){
                 if (canrotate)
                 {
                     RotateView();
@@ -114,24 +114,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     mouseLook.LookOveride(transform, cam.transform);
                 }
-            }
+           // }
 
         }
         public void CamGoBack(float speed)
         {
-            if(!enemyFollow.gameover){
+            // if(!enemyFollow.gameover){
                 mouseLook.CamGoBack(transform, cam.transform, speed);
-            }
+            // }
         }
         public void CamGoBackAll ()
         {
-            if(!enemyFollow.gameover){
+            // if(!enemyFollow.gameover){
             mouseLook.CamGoBackAll(transform, cam.transform);
-            }
+            // }
         }
         private void FixedUpdate()
         {
-            if(!enemyFollow.gameover){
+            // if(!enemyFollow.gameover){
                 GroundCheck();
                 Vector2 input = GetInput();
 
@@ -190,7 +190,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         m_RigidBody.AddRelativeForce(Time.deltaTime * 1000f * -movementSettings.SpeedInAir * Mathf.Abs(inputVector.x), 0, 0);
                     }
                 }  
-            }
+            // }
             
         }
 
